@@ -11,4 +11,49 @@
     The world is your oyster.
     <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
   </div>
+  <input type="button" (click)="obtenerPersona()">
+  <div style="text-align:center">
+    <div class = "tipoRoom">
+      <label>Tipo de habitacion: </label>
+    <select>
+      <option *ngFor= "let opciones of miHotel.nombreHabitaciones" value="">
+        <p>
+            {{opciones}}
+        </p></option>
+    </select>
+  </div>
+    <div class = "tipoCama">
+    <label>Tipo de cama: </label>
+    <select class = "selectC">
+        <option *ngFor= "let opciones of miHotel.camas" >
+              {{opciones}}
+        </option>
+      </select>
+    </div>
+      <div class= "categoria">
+      <label>
+          categoria
+        </label>
+        <select>
+          <option>*</option>
+          <option>**</option>
+          <option>***</option>
+          <option>****</option>
+          <option>*****</option>
+        </select>
+      </div>
+        <div class="checkbox">
+          <label>Complementos: </label>
+  <form *ngFor = "let extra of miHotel.extras" action="/action_page.php">
+    <input type="checkbox" name="secador" value="extra"> {{extra}}<br>
+  </form>
+  </div>
+  <div class = "precio">
+  <label>
+    Precio
+  </label>
+  <input type="text" id="precio">
+  </div>
+  <input type="submit" value="Submit">
+  </div>
 </ion-content>
