@@ -15,7 +15,7 @@
   <div style="text-align:center">
     <div class = "tipoRoom">
       <label>Tipo de habitacion: </label>
-    <select>
+    <select id="selectNombreHabitacion">
       <option *ngFor= "let opciones of miHotel.nombreHabitaciones" value="">
         <p>
             {{opciones}}
@@ -24,7 +24,7 @@
   </div>
     <div class = "tipoCama">
     <label>Tipo de cama: </label>
-    <select class = "selectC">
+    <select class = "selectC" id="selectCama">
         <option *ngFor= "let opciones of miHotel.camas" >
               {{opciones}}
         </option>
@@ -34,7 +34,7 @@
       <label>
           categoria
         </label>
-        <select>
+        <select id="selectCategoria">
           <option>*</option>
           <option>**</option>
           <option>***</option>
@@ -44,16 +44,16 @@
       </div>
         <div class="checkbox">
           <label>Complementos: </label>
-  <form *ngFor = "let extra of miHotel.extras" action="/action_page.php">
-    <input type="checkbox" name="secador" value="extra"> {{extra}}<br>
-  </form>
+    <p *ngFor = "let extra of miHotel.extras">
+    <input type="checkbox" id={{extra}} value={{extra}}> {{extra}}<br>
+  </p>
   </div>
-  <div class = "precio">
-  <label>
+  <div class = "precio" >
+  <label >
     Precio
   </label>
-  <input type="text" id="precio">
+  <input type="text" id="precio" id="precioInput">
   </div>
-  <input type="submit" value="Submit">
+  <input type="submit" value="Submit" (click)="getHotelCreado()">
   </div>
 </ion-content>
