@@ -5,7 +5,7 @@ import { Hotel } from './hotel';
 import { ThrowStmt } from '@angular/compiler';
 export class GeneradorHoteles {
 	private nombreHoteles = [ 'benebento', 'manolis', 'abcdiablo' ];
-	private _nombreHabitaciones = [ 'simple', 'doble', 'suit' ];
+	private _nombreHabitaciones = [ 'Simple', 'Doble', 'Suit' ];
 	private MINIMO: number = 3;
 	private MAXIMO: number = 10;
 	private _hoteles: Hotel[] = new Array();
@@ -75,13 +75,12 @@ export class GeneradorHoteles {
 		];
 		for (let i = 0; i < complemento.length; i++) {
 			for (let j = 0; j < precioComponente.length; j++) {
-				if (precioComponente[j][0] === complemento[i]) {
-					precio += <number>precioComponente[j][1];
-				}
+				precio += <number>precioComponente[j][1];
 			}
 		}
 		return precio;
 	}
+
 	public get hoteles(): Hotel[] {
 		return this._hoteles;
 	}
@@ -97,7 +96,7 @@ export class GeneradorHoteles {
 	public get camas(): Complemento[] {
 		return this._camas;
 	}
-	public get extras(): Complemento[]{
-        return this._extras;
-    }
+	public get extras(): Complemento[] {
+		return this._extras;
+	}
 }
