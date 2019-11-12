@@ -20,7 +20,6 @@ export class GeneradorHoteles {
 	}
 	constructor() {
 		this.generarHoteles();
-		console.log(this.nombreHabitaciones);
 	}
 
 	public getHoteles(): Hotel[] {
@@ -51,7 +50,6 @@ export class GeneradorHoteles {
 			componentes = this.generarComponentes(this.getAleatorio(0, 3));
 			tipoHabitacion.push(new TipoHabitacion(capacidad, componentes, nombre));
 		}
-		console.log(tipoHabitacion);
 		return tipoHabitacion;
 	}
 	private generarComponentes(numero: number): Complemento[] {
@@ -62,7 +60,6 @@ export class GeneradorHoteles {
 			let pos = this.getAleatorio(0, this._extras.length);
 			misComponentes.push(this._extras[pos]);
 		}
-		console.log('componenetes : ' + misComponentes);
 		return misComponentes;
 	}
 	private getAleatorio(minimo, maximo): number {
@@ -78,14 +75,10 @@ export class GeneradorHoteles {
 		];
 		for (let i = 0; i < complemento.length; i++) {
 			for (let j = 0; j < precioComponente.length; j++) {
-				console.log(precioComponente[j][0] + '  -  ' + complemento[i]);
-				if (precioComponente[j][0] === complemento[i]) {
-					console.log('llegue');
 					precio += <number>precioComponente[j][1];
 				}
 			}
 		}
-		console.log(precio);
 		return precio;
 	}
 	public get hoteles(): Hotel[] {
