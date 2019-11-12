@@ -1,59 +1,75 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      HOTELILLOS
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <form #form="ngForm" (ngSubmit)="logForm(form)" novalidate>
+      <ion-item>
   <input type="button" (click)="obtenerPersona()">
-  <div style="text-align:center">
-    <div class = "tipoRoom">
-      <label>Tipo de habitacion: </label>
-    <select id="selectNombreHabitacion">
-      <option *ngFor= "let opciones of miHotel.nombreHabitaciones" value="">
-        <p>
+    </ion-item>
+    <div style="text-align:center">
+        <div class = "tipoRoom">
+          <ion-item>
+          <label>Tipo de habitacion: </label>
+    <ion-select [(ngModel)]="todo.tipo" name="tipo" [ngModelOptions]="{standalone: false}" placeholder="Selecciona un tipo habitacion" id="selectNombreHabitacion">
+      <ion-select-option *ngFor= "let opciones of miHotel.nombreHabitaciones">
             {{opciones}}
-        </p></option>
-    </select>
-  </div>
-    <div class = "tipoCama">
-    <label>Tipo de cama: </label>
-    <select class = "selectC" id="selectCama">
-        <option *ngFor= "let opciones of miHotel.camas" >
+</ion-select-option>
+    </ion-select>
+  </ion-item>
+</div>
+<div class = "tipoCama">
+    <ion-item>
+      <label>Tipode de cama</label>
+    <ion-select [(ngModel)]="todo.cama" name="cama" [ngModelOptions]="{standalone: false}" placeholder="Selecciona un tipo de Cama" class = "selectC" id="selectCama">
+        <ion-select-option *ngFor= "let opciones of miHotel.camas">
               {{opciones}}
-        </option>
-      </select>
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
     </div>
       <div class= "categoria">
-      <label>
-          categoria
-        </label>
-        <select id="selectCategoria">
-          <option>*</option>
-          <option>**</option>
-          <option>***</option>
-          <option>****</option>
-          <option>*****</option>
-        </select>
+        <ion-item>
+          <label>Categoria</label>
+        <ion-select [(ngModel)]="todo.categoria" name="categoria" [ngModelOptions]="{standalone: false}" placeholder="Selecciona una Categoria">
+            <ion-select-option value="*">*</ion-select-option>
+            <ion-select-option value="**">**</ion-select-option>
+            <ion-select-option value="***">***</ion-select-option>
+            <ion-select-option value="****">****</ion-select-option>
+            <ion-select-option value="*****">*****</ion-select-option>
+        </ion-select>
+      </ion-item>
       </div>
         <div class="checkbox">
-          <label>Complementos: </label>
-    <p *ngFor = "let extra of miHotel.extras">
-    <input type="checkbox" id={{extra}} value={{extra}}> {{extra}}<br>
-  </p>
+          <ion-item>
+            <label>COMPLEMENTOS </label>
+      <ion-list>
+          <ion-item>
+          <ion-label>Secador</ion-label>
+          <ion-checkbox aria-checked="true" [(ngModel)]="complemento.secador" name="secador"> </ion-checkbox>
+    </ion-item>
+    <ion-item>
+        <ion-label>Minibar</ion-label>
+      <ion-checkbox aria-checked="true" [(ngModel)]="complemento.minibar" name="minibar"> </ion-checkbox>
+    </ion-item>
+    </ion-list>
+</ion-item>
   </div>
-  <div class = "precio" >
-  <label >
+  <div class = "precio">
+    <ion-item>
+  <ion-label>
     Precio
-  </label>
-  <input type="text" id="precio" id="precioInput">
+  </ion-label>
+  <ion-input placeholder = "Introduzca el precio que desea" type="text" [(ngModel)]="todo.precio" name="precio"></ion-input>
+</ion-item>
   </div>
+<ion-item >
   <input type="submit" value="Submit" (click)="getHotelCreado()">
+</ion-item>
   </div>
+  <button ion-button type="submit" block>DATOS TEST</button>
+</form>
 </ion-content>

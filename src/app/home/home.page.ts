@@ -1,3 +1,4 @@
+import { Hotel } from './../core/model/hotel';
 import { TipoHabitacion } from './../core/model/tipoHabitacion';
 import { Component } from '@angular/core';
 import { GeneradorHoteles } from '../core/model/generador-hoteles';
@@ -13,10 +14,30 @@ export class HomePage {
 	public complemento = Complemento;
 	public miHotel: GeneradorHoteles;
 	private hoteles;
+	private dataTofilter;
+	complemento = {
+		minibar: false,
+		secador: false,
+	}
+	todo = {
+		tipo: '',
+		cama: '',
+		categoria: '',
+		precio: ''
+	};
+
+	logForm(form) {
+		this.dataTofilter = form.value;
+		console.log(this.dataTofilter);
+	}
+	ptionsFn() {
+		console.log(this.todo);
+	}
 	constructor(public router: Router) {
 		this.miHotel = new GeneradorHoteles();
 		this.hoteles = this.miHotel.getHoteles();
 	}
+
 	obtenerPersona() {
 		let navigationExtras: NavigationExtras = {
 			state: {
@@ -26,47 +47,39 @@ export class HomePage {
 		// Utilizo el router
 		this.router.navigate([ 'uno' ], navigationExtras);
 	}
-	getHotelCreado() {
-		let nombreBox = document.getElementById('selectNombreHabitacion');
-		let camaBox = document.getElementById('selectCama');
-		let categoriaBox = document.getElementById('selectCategoria');
-		let precio = document.getElementById('precioInput').value;
-		let nombre = nombreBox.options[nombreBox.selectedIndex].text;
-		let cama = camaBox.options[camaBox.selectedIndex].text;
-		let categoria = categoriaBox.selectedIndex;
-		let minibarBox = document.getElementById('minibar');
-		let secadorBox = document.getElementById('secador');
-		let minibar = this.getValueChecked(minibarBox);
-		let secador = this.getValueChecked(secadorBox);
-		console.log(precio, cama, nombre, categoria, minibar, secador);
-		//console.log(this.filtrar(categoria,nombre,precio,minibar));
-	}
+
 	getValueChecked(elemento) {
 		if (elemento.checked) {
 			return elemento.value;
 		}
 	}
 
-	filtrarCategoria(categoria) {
-		let retorno = this.hoteles.filter(function(hotel) {
-			return hotel.categoria.toString() === categoria.toString();
-		});
+	filtrarCategoria() {
+		let retorno = this.hoteles
+			.filter(function(hotel: Hotel) {
+				return hotel.categoria.toString() === this.categoria.toString();
+			})
+			.filter(function(tipoHabitacion: TipoHabitacion) {
+				return tipoHabitacion.complementos.toString() === this.cama.toString();
+			});
+		console.log(this.filtrarCategoria());
 		return retorno;
 	}
+
 	filtrarTipoHabitacion(habitacion, vector) {
-		let retorno = vector.filter(function(hotel) {
-			return hotel.tipoHabitacion.clasificacion.toString() === habitacion.toString();
+		let retorno = vector.filter(function(tipohabitacion: TipoHabitacion) {
+			return tipohabitacion.capacidad === habitacion.toString();
 		});
 		return retorno;
 	}
-	filtrarPrecioHabitacion(habitacion, vector) {
-		let retorno = vector.filter(function(hotel) {
-			return hotel.precio <= parseInt(habitacion.toString());
+	filtrarPrecioHabitacion(precio, vector) {
+		let retorno = vector.filter(function(hotel: Hotel) {
+			return hotel.precio <= parseInt(precio.toString());
 		});
 		return retorno;
 	}
 	filtrarComplemento(habitacion, vector) {
-		let retorno = this.hoteles.tipoHabitacion.complementos.filter(function(hotel) {
+		let retorno = vector.tipoHabitacion.complementos.filter(function(hotel) {
 			return hotel.toLowerCase().indexOf(habitacion.toLowerCase()) > -1;
 		});
 		return retorno;
