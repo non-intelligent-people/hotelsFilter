@@ -1,3 +1,3 @@
 export enum Complemento{
-    secador="secador", minibar="minibar", individual="individual", doble="doble", kingSize="kingSize"
+    secador="Secador", minibar="Minibar", individual="Individual", doble="Doble", kingSize="KingSize"
 }

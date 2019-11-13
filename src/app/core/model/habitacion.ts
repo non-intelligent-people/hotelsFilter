@@ -2,7 +2,7 @@ import { TipoHabitacion } from './tipoHabitacion';
 
 export class Habitacion {
     private _precio;
-    private _tipoHabitacion;
+    private _tipoHabitacion:TipoHabitacion;
 
     constructor(precio: number, tipoHabitacion: TipoHabitacion) {
         this._precio = precio;
