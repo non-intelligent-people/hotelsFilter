@@ -17,8 +17,8 @@ export class HomePage {
   private hoteles;
   private dataTofilter;
   private _complemento = {
-    minibar: false,
-    secador: false
+    Minibar: false,
+    Secador: false
   };
   private _todo = {
     tipo: '',
@@ -57,7 +57,6 @@ export class HomePage {
     let retorno = this.hoteles.filter(function (hotel: Hotel) {
       return hotel.categoria === that.categoria.length;
     });
-    console.log(retorno);
     return retorno;
   }
   filtrar() {
@@ -72,17 +71,23 @@ export class HomePage {
     if (that.tipo.length > 0) {
       actual = this.filtrarTipoHabitacion(that.tipo, actual);
     }
-    console.log(actual);
+    let misComponentes = this.obtenerExtras();
+    if (misComponentes.length > 0) {
+      if (this.todo.cama.length > 0) {
+        misComponentes.push(this.todo.cama);
+      }
+      actual = this.filtrarComplemento(misComponentes, actual);
+    }
+    console.log("el array es: ", actual);
     console.log(this.todo, this.obtenerExtras());
   }
 
   filtrarTipoHabitacion(habitacion, vector: Hotel[]) {
     let retorno: Hotel[] = new Array();
     let temporal: Habitacion[] = new Array();
-    console.log(habitacion.toString().toLowerCase());
     for (let i = 0; i < vector.length; i++) {
-      temporal = vector[i].tiposHabitacion.filter(function(tipohabitacion: Habitacion) {
-        return tipohabitacion.tipoHabitacion.clasificacion.toString() == habitacion.toString();
+      temporal = vector[i].tiposHabitacion.filter(function (tipohabitacion: Habitacion) {
+        return tipohabitacion.tipoHabitacion.clasificacion.toString().trim() === habitacion.toString().trim();
       });
       if (temporal.length > 0) {
         retorno.push(vector[i]);
@@ -107,21 +112,49 @@ export class HomePage {
 
     return retorno;
   }
-  filtrarComplemento(habitacion, vector) {
-    let retorno = vector.tipoHabitacion.complementos.filter(function (hotel) {
-      return hotel.toLowerCase().indexOf(habitacion.toLowerCase()) > -1;
-    });
+  filtrarComplemento(complementos, vector) {
+    let that = this;
+    let retorno: Hotel[] = new Array();
+    let temporal: Habitacion[] = new Array();
+    for (let i = 0; i < vector.length; i++) {
+      temporal = vector[i].tiposHabitacion.filter(function (habitacion: Habitacion) {
+        console.log("complementos de la habitacion :" + habitacion.tipoHabitacion.complementos, complementos);
+        console.log(that.compararComponentes(habitacion.tipoHabitacion.complementos, complementos));
+        return that.compararComponentes(habitacion.tipoHabitacion.complementos, complementos);
+      });
+      console.log(temporal);
+      if (temporal.length > 0) {
+        retorno.push(vector[i]);
+      }
+      
+    }
     return retorno;
   }
   obtenerExtras() {
-    let retorno: string[] = new Array();
+    const retorno: string[] = new Array();
     for (const elementoExtra in this.complementos) {
-      console.log(elementoExtra);
       if (this.complementos[elementoExtra]) {
         retorno.push(elementoExtra);
       }
     }
     return retorno;
+  }
+  private compararComponentes(componente: Complemento[], misComponentes: string[]) {
+    for (let i = 0; i < misComponentes.length; i++) {
+      if (!this.indexOf(componente, misComponentes[i])) {
+        return false;
+      }
+
+    }
+    return true;
+  }
+  private indexOf(base, comparado) {
+    for (let i = 0; i < base.length; i++) {
+      if (base[i].toString().toLowerCase().trim() === comparado.toString().toLowerCase().trim()) {
+        return true;
+      }
+    }
+    return false;
   }
   get complementos() {
     return this._complemento;
