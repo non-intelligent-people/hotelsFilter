@@ -39,7 +39,7 @@ export class HomePage {
   obetenerHoteles() {
     let navigationExtras: NavigationExtras = {
       state: {
-        hoteles: this.hoteles
+        hoteles: this.filtrar()
       }
     };
     // Utilizo el router
@@ -80,6 +80,7 @@ export class HomePage {
     }
     console.log("el array es: ", actual);
     console.log(this.todo, this.obtenerExtras());
+    return actual;
   }
 
   filtrarTipoHabitacion(habitacion, vector: Hotel[]) {
