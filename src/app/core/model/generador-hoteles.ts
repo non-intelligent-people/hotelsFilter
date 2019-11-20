@@ -46,7 +46,7 @@ export class GeneradorHoteles {
 		let nombre;
 		for (let i = 0; i < numeroTiposHabitaciones; i++) {
 			nombre = nombreHabitaciones[this.getAleatorio(0, nombreHabitaciones.length)];
-			capacidad = this.getAleatorio(0, 4);
+			capacidad = this.getAleatorio(1, 4);
 			componentes = this.generarComponentes(this.getAleatorio(0, 3));
 			tipoHabitacion.push(new TipoHabitacion(capacidad, componentes, nombre));
 		}

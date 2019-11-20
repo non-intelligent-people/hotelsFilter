@@ -2,7 +2,7 @@ import { Complemento } from './complemento';
 
 export class TipoHabitacion {
     private _capacidad;
-    private _complementos;
+    private _complementos:Complemento[];
     private _clasificacion;
 
 

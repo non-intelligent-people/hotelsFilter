@@ -21,7 +21,7 @@
         </div>
         <div class = "tipoCama">
           <ion-item>
-            <label>Tipode de cama</label>
+            <label>Tipo de cama</label>
             <ion-select [(ngModel)]="todo.cama" name="cama" [ngModelOptions]="{standalone: false}" placeholder="Selecciona un tipo de Cama" class = "selectC" id="selectCama">
               <ion-select-option *ngFor= "let opciones of miHotel.camas">
                 {{opciones}}
@@ -68,6 +68,6 @@
 </div>
 </ion-item>
 <ion-item>
-<ion-button type="button" (click)="obtenerPersona()">MOSTRAR HABITACIONES</ion-button>
+<ion-button type="button" (click)="obetenerHoteles()">MOSTRAR HABITACIONES</ion-button>
 </ion-item>
 </ion-content>
