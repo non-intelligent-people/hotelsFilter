@@ -7,16 +7,25 @@
 
 <ion-content>
   <div *ngFor="let hotel of data">
-    <ion-card *ngFor="let habitacion of hotel.tiposHabitacion">
+
+    <ion-item *ngFor="let habitacion of hotel.tiposHabitacion" >
+      <ion-card >
+
         <ion-card-header>
           <ion-card-subtitle>{{hotel.nombre}}</ion-card-subtitle>
           <ion-card-title>{{habitacion.tipoHabitacion.clasificacion}}</ion-card-title>
         </ion-card-header>
-      
+
+        
         <ion-card-content>
-            {{habitacion.tipoHabitacion.complementos}}
+          {{habitacion.tipoHabitacion.complementos}}
         </ion-card-content>
+        <ion-item>
+          <ion-button type="button" (click)="obetenerHabitacion(habitacion)">SELECCIONAR</ion-button>
+          </ion-item>
       </ion-card>
+    </ion-item>
+
     </div>
 <h1>{{this.data}}</h1>
 </ion-content>
